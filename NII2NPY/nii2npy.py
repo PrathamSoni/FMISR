@@ -8,6 +8,7 @@ if not os.path.exists(outdir):
     os.makedirs(outdir)
 
 files = glob.glob("../HCP/*/*/*/*/*.nii")
+#Creates numpy array file for loaded images
 for filepath in files:
     file = nibabel.load(filepath).get_data().transpose(1, 0, 2)
     print('  Data shape is ' + str(file.shape) + ' .')
