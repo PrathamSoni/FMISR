@@ -9,6 +9,8 @@ import tensorflow as tf
 
 from tf_dcsrn import dcsrn, image_util
 
+#script for training step
+
 output_path = "./snapshots/test"
 # path of dataset, here is the HCP dataset
 dataset_HCP = "Train"
