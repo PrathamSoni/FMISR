@@ -19,9 +19,11 @@ def get_all_images():
 
 # Get all images from the NPY files
 images = get_all_images()
-
+#LR sample generator
 def getLR(hr_data):
+    #define a random scale
     scale=2-random.random()
+    #breakdown to discrete level
     '''if random.random()>2./3.:
         scale=2.
     elif random.random()>1./3.:
@@ -29,60 +31,23 @@ def getLR(hr_data):
     else:
         scale=1.2'''
     print(scale)
+    #dummy array
     img_out=np.zeros(hr_data.shape)
-    
+    #slice out of HR
     image0=hr_data[:,:,:,0]  
     image1=hr_data[:,:,:,1]
     image2=hr_data[:,:,:,2]
-    
+    #interpolate down
     image0=scipy.ndimage.zoom(image0, 1./scale)
     image1=scipy.ndimage.zoom(image1, 1./scale)
     image2=scipy.ndimage.zoom(image2, 1./scale)
-    
+    #interpolate up
     image0=scipy.ndimage.zoom(image0, (float(img_out.shape[0])/image0.shape[0],float(img_out.shape[1])/image0.shape[1],float(img_out.shape[2])/image0.shape[2]))
     image1=scipy.ndimage.zoom(image1, (float(img_out.shape[0])/image1.shape[0],float(img_out.shape[1])/image1.shape[1],float(img_out.shape[2])/image1.shape[2]))
     image2=scipy.ndimage.zoom(image2, (float(img_out.shape[0])/image2.shape[0],float(img_out.shape[1])/image2.shape[1],float(img_out.shape[2])/image2.shape[2]))
-    
+    #cop slices
     img_out[:,:,:,0]=image0
     img_out[:,:,:,1]=image1
     img_out[:,:,:,2]=image2
     
     return img_out
-
-'''  
-# TODO Figure out how to perform FFT in python
-for image in images:
-    image -= np.amin(image)
-    image /= np.amax(image)
-    d = image.shape[0]
-    for i in range(100, 101):
-        img = image[i, :, :]
-        origin_name = './' + str(i) + '.png'
-        save_name = './' + str(i) + '_ifft.png'
-
-        imgfft = np.fft.fft2(img)
-        x_center = imgfft.shape[0] // 2
-        y_center = imgfft.shape[1] // 2
-
-        imgfft[x_center-70 : x_center+70, y_center-50 : y_center+50] = 0
-
-        imgifft = np.fft.ifft2(imgfft)
-        imgifft = np.real(imgifft)
-        imgifft -= np.amin(imgifft)
-        imgifft /= np.amax(imgifft)
-        imgifft *= 255        
-
-        img -= np.amin(img)
-        img /= np.amax(img)
-        img *= 255
-        # [100:150, 100:150]
-        Image.fromarray(img.round().astype(np.uint8)).save(origin_name, 'PNG', dpi=[300,300], compression_level = 0)
-
-        Image.fromarray(imgifft.round().astype(np.uint8)).save(save_name, 'PNG', dpi=[300,300], compression_level = 0)
-        print(ssim.get_ssim(img, imgifft).mean())
-
-# TODO perform truncating op
-# ...
-# TODO perform iFFT and get the LR images
-# ...
-'''
