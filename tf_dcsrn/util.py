@@ -9,7 +9,7 @@ def log10(x):
   numerator = tf.log(x)
   denominator = tf.log(tf.constant(10, dtype=numerator.dtype))
   return numerator / denominator
-
+#shows outimages
 def plot_prediction(x_test, y_test, prediction, save=False):
     import matplotlib
     import matplotlib.pyplot as plt
@@ -42,7 +42,7 @@ def plot_prediction(x_test, y_test, prediction, save=False):
     else:
         fig.show()
         plt.show()
-
+#convertor
 def to_rgb(img):
     """
     Converts the given array into a RGB image. If the number of channels is not
@@ -63,7 +63,7 @@ def to_rgb(img):
     img /= np.amax(img)
     img *= 255
     return img
-
+#cropping
 def crop_to_shape(data, shape):
     """
     Crops the array to the given image shape by removing the border (expects a tensor of shape [batches, nx, ny, channels].
