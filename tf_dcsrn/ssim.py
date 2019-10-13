@@ -3,7 +3,7 @@ import numpy as np
 from scipy import signal
 from scipy import ndimage
 
-
+#Provides ssim calculation called for training
 def gaussian2(size, sigma):
     A = 1/(2.0*np.pi*sigma**2)
     x, y = np.mgrid[-size//2 + 1:size//2 + 1, -size//2 + 1:size//2 + 1]
