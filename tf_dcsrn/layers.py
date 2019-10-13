@@ -1,6 +1,3 @@
-'''
-author: jakeret
-'''
 from __future__ import print_function, division, absolute_import, unicode_literals
 
 import tensorflow as tf
