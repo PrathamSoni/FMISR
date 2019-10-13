@@ -1,6 +1,3 @@
-'''
-author: MANYZ
-'''
 from __future__ import print_function, division, absolute_import, unicode_literals
 import sys
 sys.path.append("../")
@@ -152,7 +149,7 @@ class ImageDataProvider(BaseDataProvider):
     
         return img,label
 
-
+#Used for training
 class MedicalImageDataProvider(BaseDataProvider):
     """
     Generic data provider for high resolution and low resolution images, supports gray scale.
@@ -203,6 +200,7 @@ class MedicalImageDataProvider(BaseDataProvider):
             img = self._load_file(image_name, np.float32)
 
         return img
+#used for testing no shuffle    
 class TestDataProvider(BaseDataProvider):
     """
     Generic data provider for high resolution and low resolution images, supports gray scale.
