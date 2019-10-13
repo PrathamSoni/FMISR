@@ -17,7 +17,7 @@ hr_list=glob("/home/psoni/Desktop/project/psoni/MRISR/Test/*.nii.gz")
 outdir="/home/psoni/Desktop/project/psoni/MRISR/test_outs/"
 init = tf.global_variables_initializer()
 
-    
+#Generate LR using same steps as earlier
 def interpolate(hr_data, order):
     scale=2-random.random()
     '''if random.random()>2./3.:
@@ -46,11 +46,11 @@ def interpolate(hr_data, order):
     img_out[:,:,:,2]=image2
     
     return img_out
-    
+#PSNR function    
 def PSNR(low,high):
     mse=np.mean(np.square(high-low))
     return 20*math.log10(1./math.sqrt(mse))
-    
+#get ssim/psnr and write out files    
 with tf.Session() as sess:
     sess.run(init)
     for order_ in [0,3]:
