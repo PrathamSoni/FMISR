@@ -17,7 +17,7 @@ from tf_dcsrn.layers import (weight_variable, conv3d, pixel_wise_softmax_2, resB
 from tf_dcsrn.tfSSIM import(tf_ssim)
 import nibabel as nib
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(message)s')
-
+#Building model
 def create_conv_net(x, channels=3, layers=4, growth_rate=50, filter_size=3, summaries=True):
     """
     Creates a new convolutional dcsrn for the given parametrization.
